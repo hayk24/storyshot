@@ -1,0 +1,35 @@
+{
+  "name": "storyshot",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "types": "./lib/index.d.ts",
+  "bin": {
+    "storyshot": "lib/cli.js"
+  },
+  "scripts": {
+    "test": "vite-node ./src/cli.ts \"http://localhost:6006\"",
+    "test:clean": "rm -rf __screenshots__",
+    "build": "tsc -p ./tsconfig.build.json",
+    "clean": "rm -rf dist"
+  },
+  "author": "geonhyeoklee",
+  "keywords": [
+    "storybook",
+    "playwright"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "ky": "^1.7.4",
+    "playwright": "^1.49.1",
+    "sanitize-filename": "^1.6.3",
+    "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.16",
+    "@types/yargs": "^17.0.33",
+    "typescript": "^5.7.3",
+    "vite-node": "^3.0.1"
+  }
+}

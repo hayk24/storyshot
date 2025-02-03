@@ -1,0 +1,18 @@
+{
+  "name": "storyshot-workspace",
+  "version": "0.0.0",
+  "scripts": {
+    "build": "pnpm --filter storyshot build",
+    "test": "pnpm --filter storyshot test"
+  },
+  "author": "geonhyeoklee",
+  "keywords": [
+    "storybook",
+    "playwright"
+  ],
+  "license": "MIT",
+  "packageManager": "pnpm@9.15.0",
+  "engines": {
+    "node": ">=20.17.16"
+  }
+}
