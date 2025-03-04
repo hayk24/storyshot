@@ -81,6 +81,9 @@ jobs:
       - name: Build Project
         run: cd packages/storyshot && pnpm run build
 
+      - name: Test Publish
+        run: cd packages/storyshot && pnpm publish --dry-run
+
       - name: Publish to NPM
         run: cd packages/storyshot && pnpm publish --access public
         env:
