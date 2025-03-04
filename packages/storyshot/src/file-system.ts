@@ -15,7 +15,7 @@ export class FileSystem {
       ? sanitize((kind + '_' + story).replace(/\//g, '_'))
       : kind
           .split('/')
-          .map(k => sanitize(k))
+          .map((k) => sanitize(k))
           .join('/') +
         '/' +
         sanitize(story);

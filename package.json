@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "build": "pnpm --filter storyshot build",
-    "test": "pnpm --filter storyshot test"
+    "test": "pnpm --filter storyshot test",
+    "format": "pnpm dlx prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "format:check": "pnpm dlx prettier --check \"**/*.{js,jsx,ts,tsx,json,md}\""
   },
   "author": "geonhyeoklee",
   "keywords": [
@@ -14,5 +16,8 @@
   "packageManager": "pnpm@9.15.0",
   "engines": {
     "node": ">=20.17.16"
+  },
+  "devDependencies": {
+    "prettier": "^3.5.3"
   }
 }

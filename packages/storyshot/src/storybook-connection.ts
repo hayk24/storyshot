@@ -3,9 +3,7 @@ import ky from 'ky';
 export class StorybookConnection {
   private storybookUrl: string;
 
-  constructor({ storybookUrl }: {
-    storybookUrl: string;
-  }) {
+  constructor({ storybookUrl }: { storybookUrl: string }) {
     this.storybookUrl = storybookUrl;
   }
 
@@ -19,7 +17,7 @@ export class StorybookConnection {
     if (!storybookUrl.startsWith('http')) {
       throw new Error('Invalid URL');
     }
-  
+
     const interval = 1000;
     const maxAttempts = 10_000 / interval;
     let attempts = 0;

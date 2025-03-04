@@ -1,13 +1,13 @@
-import type { Story } from "./types";
+import type { Story } from './types';
 
-import { ScreenshotBrowser } from "./screenshot-browser";
-import { createScreenshotSystem } from "./screenshot-system";
-import { StoryStoreBrowser } from "./story-store-browser";
-import { StorybookConnection } from "./storybook-connection";
+import { ScreenshotBrowser } from './screenshot-browser';
+import { createScreenshotSystem } from './screenshot-system';
+import { StoryStoreBrowser } from './story-store-browser';
+import { StorybookConnection } from './storybook-connection';
 
 type Options = {
-  storybookUrl: string
-}
+  storybookUrl: string;
+};
 
 export async function main({ storybookUrl }: Options) {
   const storybookConnection = new StorybookConnection({ storybookUrl });
@@ -34,15 +34,13 @@ export async function main({ storybookUrl }: Options) {
       const page = await screenshotBrowser.createPage();
 
       return {
-        createScreenshot: (story: Story) => screenshotBrowser.createScreenshot(page, story),
-      }
-    }),
+        createScreenshot: (story: Story) =>
+          screenshotBrowser.createScreenshot(page, story),
+      };
+    })
   );
 
-  const screenshotSystem = createScreenshotSystem(
-    stories,
-    workers,
-  );
+  const screenshotSystem = createScreenshotSystem(stories, workers);
 
   const capturedCount = await screenshotSystem.execute();
 

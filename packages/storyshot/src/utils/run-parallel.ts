@@ -1,4 +1,4 @@
-import { Task } from "./queue";
+import { Task } from './queue';
 
 export async function runParallel<Result, Worker>(
   tasks: () => AsyncGenerator<Task<Result, Worker>, void>,
@@ -10,11 +10,11 @@ export async function runParallel<Result, Worker>(
 
   await Promise.all(
     [...new Array(workers.length).keys()].map(
-      idx =>
+      (idx) =>
         new Promise<void>((resolve, reject) => {
           async function nextTask() {
             const { done, value: task } = await generator.next();
-            
+
             if (done === true || !task) {
               return resolve();
             }
@@ -31,8 +31,8 @@ export async function runParallel<Result, Worker>(
           }
 
           return nextTask();
-        }),
-    ),
+        })
+    )
   );
 
   return results;
