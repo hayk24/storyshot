@@ -1,12 +1,12 @@
 export type QueueController<Request> = {
   push: (request: Request) => void;
-}
+};
 
 export type Task<Result, Worker> = (worker: Worker) => Promise<Result>;
 
 type CreateDelegationTask<Request, Result, Worker> = (
   request: Request,
-  controller: QueueController<Request>,
+  controller: QueueController<Request>
 ) => Task<Result, Worker>;
 
 export class Queue<Request, Result, Worker> {
@@ -14,7 +14,10 @@ export class Queue<Request, Result, Worker> {
   private readonly createDelegationTask;
   private readonly futureRequests: Promise<Request>[] = [];
 
-  constructor( initialRequests: Request[], createDelegationTask: CreateDelegationTask<Request, Result, Worker>) {
+  constructor(
+    initialRequests: Request[],
+    createDelegationTask: CreateDelegationTask<Request, Result, Worker>
+  ) {
     this.createDelegationTask = createDelegationTask;
 
     for (const request of initialRequests) {
@@ -32,7 +35,7 @@ export class Queue<Request, Result, Worker> {
 
   async *tasks(): AsyncGenerator<Task<Result, Worker>, void> {
     const controller = this.createQueueController();
-    
+
     while (this.isContinue === true && this.futureRequests.length > 0) {
       try {
         const futureRequest = this.futureRequests.shift()!;
@@ -53,7 +56,7 @@ export class Queue<Request, Result, Worker> {
 
     return async (worker: Worker) => {
       const result = await delegateTask(worker);
-      
+
       if (this.futureRequests.length === 0) {
         this.close();
       }

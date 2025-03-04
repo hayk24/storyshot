@@ -1,8 +1,8 @@
-import type { StorybookConnection } from "./storybook-connection";
-import type { Story } from "./types";
+import type { StorybookConnection } from './storybook-connection';
+import type { Story } from './types';
 
-import { Browser, BrowserContext, chromium, Page } from "playwright";
-import { sleep } from "./utils/sleep";
+import { Browser, BrowserContext, chromium, Page } from 'playwright';
+import { sleep } from './utils/sleep';
 
 type API = {
   storyStore?: {
@@ -10,7 +10,7 @@ type API = {
     cachedCSFFiles?: Record<string, unknown>;
   };
   raw?: () => { id: string; kind: string; name: string }[];
-}
+};
 
 type PreviewAPI = {
   storyStoreValue?: {
@@ -61,8 +61,10 @@ export class StoryStoreBrowser {
   }
 
   private cacheCsfFiles() {
-    const api = (window as WindowInIframe).__STORYBOOK_CLIENT_API__ || (window as WindowInIframe).__STORYBOOK_PREVIEW__;
-    
+    const api =
+      (window as WindowInIframe).__STORYBOOK_CLIENT_API__ ||
+      (window as WindowInIframe).__STORYBOOK_PREVIEW__;
+
     function isPreviewApi(api: PreviewAPI): api is PreviewAPI {
       return api.storyStoreValue !== undefined;
     }
@@ -74,22 +76,30 @@ export class StoryStoreBrowser {
     if (isPreviewApi(api)) {
       return api.storyStoreValue && api.storyStoreValue.cacheAllCSFFiles();
     }
-    
-    return api.storyStore?.cacheAllCSFFiles && api.storyStore.cacheAllCSFFiles();
+
+    return (
+      api.storyStore?.cacheAllCSFFiles && api.storyStore.cacheAllCSFFiles()
+    );
   }
 
-  private recursiveGetStories(): Promise<{ stories: Story[]; timeout: boolean }> {
+  private recursiveGetStories(): Promise<{
+    stories: Story[];
+    timeout: boolean;
+  }> {
     function isPreviewApi(api: API | PreviewAPI): api is PreviewAPI {
       return (api as PreviewAPI).storyStoreValue !== undefined;
     }
 
-    return new Promise<{ stories: Story[]; timeout: boolean }>(resolve => {
+    return new Promise<{ stories: Story[]; timeout: boolean }>((resolve) => {
       const recursiveGetStories = (count = 0) => {
         const MAX_CONFIGURE_WAIT_COUNT = 4_000;
-        const api =
-          ((window as WindowInIframe).__STORYBOOK_CLIENT_API__ || (window as WindowInIframe).__STORYBOOK_PREVIEW__)!;
-        
-        const configuringStore = isPreviewApi(api) && api.storyStoreValue && !api.storyStoreValue.cachedCSFFiles;
+        const api = ((window as WindowInIframe).__STORYBOOK_CLIENT_API__ ||
+          (window as WindowInIframe).__STORYBOOK_PREVIEW__)!;
+
+        const configuringStore =
+          isPreviewApi(api) &&
+          api.storyStoreValue &&
+          !api.storyStoreValue.cachedCSFFiles;
 
         if (configuringStore) {
           if (count < MAX_CONFIGURE_WAIT_COUNT) {
@@ -107,7 +117,12 @@ export class StoryStoreBrowser {
             : api.raw
               ? api.raw()
               : []
-        ).map<Story>(({id, kind, name}) => ({ id, kind, story: name, version: 'v5' }));
+        ).map<Story>(({ id, kind, name }) => ({
+          id,
+          kind,
+          story: name,
+          version: 'v5',
+        }));
 
         resolve({ stories, timeout: false });
       };

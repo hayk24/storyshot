@@ -9,15 +9,21 @@
     "storyshot": "lib/cli.js"
   },
   "scripts": {
+    "dev": "vite-node ./src/cli.ts",
     "test": "vite-node ./src/cli.ts \"http://localhost:6006\"",
     "test:clean": "rm -rf __screenshots__",
-    "build": "tsc -p ./tsconfig.build.json",
-    "clean": "rm -rf dist"
+    "build": "tsc -p ./tsconfig.build.json && chmod +x lib/cli.js",
+    "clean": "rm -rf lib && rm -rf __screenshots__"
   },
   "author": "geonhyeoklee",
   "keywords": [
     "storybook",
     "playwright"
+  ],
+  "files": [
+    "lib",
+    "LICENSE",
+    "README.md"
   ],
   "license": "MIT",
   "dependencies": {

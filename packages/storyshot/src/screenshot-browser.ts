@@ -1,13 +1,13 @@
-import type { Browser, BrowserContext, Page } from "playwright";
-import type { Story } from "./types";
+import type { Browser, BrowserContext, Page } from 'playwright';
+import type { Story } from './types';
 
-import { chromium } from "playwright";
-import { StorybookConnection } from "./storybook-connection";
+import { chromium } from 'playwright';
+import { StorybookConnection } from './storybook-connection';
 
 export type ScreenshotResult = {
   buffer: Buffer | null;
   isSuccess: boolean;
-}
+};
 
 export class ScreenshotBrowser {
   private connection: StorybookConnection;
@@ -67,20 +67,18 @@ export class ScreenshotBrowser {
     }
 
     const data = this.createPostMessageData(story);
-    
+
     await page.evaluate((_data: typeof data) => {
       window.postMessage(JSON.stringify(_data), '*');
     }, data);
   }
 
-  private async screenshot(
-    page: Page,
-  ): Promise<ScreenshotResult> {
+  private async screenshot(page: Page): Promise<ScreenshotResult> {
     try {
       const rawBuffer = await page.screenshot({
         fullPage: true,
         omitBackground: false,
-        animations: "disabled",
+        animations: 'disabled',
       });
 
       if (!Buffer.isBuffer(rawBuffer)) {
