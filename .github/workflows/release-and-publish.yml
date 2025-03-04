@@ -1,4 +1,4 @@
-name: Create GitHub Release
+name: Create Release and Publish
 
 on:
   pull_request:
@@ -18,14 +18,15 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js with pnpm
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: "pnpm"
 
-      - name: Install pnpm
-        run: corepack enable && corepack prepare pnpm@latest --activate
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v2
+        with:
+          version: latest
 
       - name: Install Dependencies
         run: cd packages/storyshot && pnpm install
@@ -48,3 +49,33 @@ jobs:
           release_name: Release v${{ steps.get-version.outputs.version }}
           draft: false
           prerelease: false
+
+  publish-npm:
+    needs: create-release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: "https://registry.npmjs.org/"
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v2
+        with:
+          version: latest
+
+      - name: Install Dependencies
+        run: cd packages/storyshot && pnpm install
+
+      - name: Build Project
+        run: cd packages/storyshot && pnpm run build
+
+      - name: Publish to NPM
+        run: cd packages/storyshot && pnpm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
