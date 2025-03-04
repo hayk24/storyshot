@@ -69,6 +69,7 @@ jobs:
         with:
           node-version: 20
           registry-url: "https://registry.npmjs.org/"
+          scope: '@rock24'
 
       - name: Setup PNPM
         uses: pnpm/action-setup@v2
@@ -85,6 +86,6 @@ jobs:
         run: cd packages/storyshot && pnpm publish --dry-run
 
       - name: Publish to NPM
-        run: cd packages/storyshot && pnpm publish --access public
+        run: cd packages/storyshot && pnpm publish --access public --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

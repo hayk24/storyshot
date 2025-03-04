@@ -1,5 +1,5 @@
 {
-  "name": "storyshot",
+  "name": "@rock24/storyshot",
   "version": "0.0.1",
   "type": "module",
   "main": "lib/index.js",
