@@ -6,8 +6,6 @@ on:
       - main
     types:
       - closed
-    paths:
-      - 'packages/storyshot/**'
 
 jobs:
   create-release:
