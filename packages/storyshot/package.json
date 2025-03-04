@@ -11,8 +11,7 @@
   "scripts": {
     "dev": "vite-node ./src/cli.ts",
     "test": "vite-node ./src/cli.ts \"http://localhost:6006\"",
-    "test:clean": "rm -rf __screenshots__",
-    "build": "tsc -p ./tsconfig.build.json && chmod +x lib/cli.js",
+    "build": "tsup",
     "clean": "rm -rf lib && rm -rf __screenshots__"
   },
   "author": "geonhyeoklee",
@@ -35,6 +34,7 @@
   "devDependencies": {
     "@types/node": "^20.17.16",
     "@types/yargs": "^17.0.33",
+    "tsup": "^8.4.0",
     "typescript": "^5.7.3",
     "vite-node": "^3.0.1"
   }
