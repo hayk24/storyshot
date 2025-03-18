@@ -36,6 +36,16 @@ npx storyshot --url <storybook-url>
 npx storyshot --url http://localhost:6006
 ```
 
+## How it works
+
+```mermaid
+graph TD;
+  A[Connect to Storybook Server] --> B[Fetch Stories]
+  B -->|Failure| C[Exit with Error]
+  B -->|Success| D[Initialize Screenshot System]
+  D --> E[Capture Screenshots in Parallel]
+```
+
 ## License
 
 MIT

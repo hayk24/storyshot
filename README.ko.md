@@ -36,6 +36,16 @@ npx storyshot --url <storybook-url>
 npx storyshot --url http://localhost:6006
 ```
 
+## 동작 원리
+
+```mermaid
+graph TD;
+  A[Storybook 서버 연결] --> B[스토리 목록 가져오기]
+  B -->|실패| C[에러와 함께 종료]
+  B -->|성공| D[스크린샷 시스템 초기화]
+  D --> E[병렬로 스크린샷 캡처]
+```
+
 ## 라이선스
 
 MIT
