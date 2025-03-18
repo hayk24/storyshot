@@ -2,7 +2,7 @@
 
 A tool for taking screenshots of Storybook components. It uses a headless browser (Playwright) to capture each story in Storybook and save the screenshot files.
 
-[한국어 문서](./README.ko.md)
+[한국어](./README.ko.md)
 
 ## Installation
 
