@@ -74,7 +74,7 @@ jobs:
         with:
           node-version: 20
           registry-url: "https://registry.npmjs.org/"
-          scope: '@rock24'
+          scope: '@hawke0204'
 
       - name: Setup PNPM
         uses: pnpm/action-setup@v2

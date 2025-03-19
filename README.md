@@ -9,7 +9,7 @@ A tool for taking screenshots of Storybook components. It uses a headless browse
 You can install Storyshot using npm:
 
 ```bash
-npm install @rock24/storyshot
+npm install @hawke0204/storyshot
 ```
 
 Or download the latest release from GitHub:
