@@ -13,7 +13,7 @@ npm install @hawke0204/storyshot
 ```
 
 또는 GitHub 릴리즈 페이지에서 최신 버전을 다운로드할 수 있습니다:
-https://github.com/geonhyeoklee/storyshot/releases
+https://github.com/hayk24/storyshot/releases
 
 ## 사용 방법
 

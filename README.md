@@ -13,7 +13,7 @@ npm install @hawke0204/storyshot
 ```
 
 Or download the latest release from GitHub:
-https://github.com/geonhyeoklee/storyshot/releases
+https://github.com/hayk24/storyshot/releases
 
 ## Usage
 
